@@ -1,0 +1,14 @@
+{
+  "name": "htmlize.js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "htmlize.js",
+  "scripts": {
+    "uglify": "uglifyjs --compress --mangle --enclose --output src/htmlize.min.js -- src/htmlize.js"
+  },
+  "author": "Slobodan Zivanovic <slobodanzivanovic@tuta.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "uglify-js": "^3.17.4"
+  }
+}
