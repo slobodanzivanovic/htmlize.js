@@ -1,4 +1,4 @@
-const Htmlize = require("../src/htmlize");
+const Htmlize = require("../../src/htmlize");
 
 const htmlize = new Htmlize();
 
