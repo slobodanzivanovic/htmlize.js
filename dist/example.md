@@ -11,3 +11,5 @@
 ###### Heading 6
 
 ########## Random heading
+
+Random text here and also **it have** bold and _italic_ inside it.
