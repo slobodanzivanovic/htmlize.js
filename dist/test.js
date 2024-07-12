@@ -4,6 +4,6 @@ const htmlize = new Htmlize();
 
 const markdownContent = htmlize.readMarkdownFile("dist", "example.md");
 
-const split = markdownContent.split("\n");
+const generated = htmlize.markdownToHtml(markdownContent);
 
-console.log(split);
+console.log(generated);

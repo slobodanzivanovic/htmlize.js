@@ -22,6 +22,26 @@ class Htmlize {
       throw new Error("Error reading markdown file: " + error.message);
     }
   }
+
+  markdownToHtml(markdownContent) {
+    const lines = markdownContent.split("\n");
+
+    let html = "";
+
+    for (let line of lines) {
+      if (line.startsWith("#")) {
+        let headerLevel = line.split(" ")[0].length;
+        const headerText = line.substring(headerLevel + 1);
+
+        // Limit header level to h6
+        headerLevel = Math.min(headerLevel, 6);
+
+        html += `<h${headerLevel}>${headerText}</h${headerLevel}>\n`;
+      }
+    }
+
+    return html;
+  }
 }
 
 module.exports = Htmlize;
