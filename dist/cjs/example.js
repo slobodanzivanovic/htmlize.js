@@ -4,6 +4,8 @@ const htmlize = new Htmlize();
 
 const markdownContent = htmlize.readMarkdownFile("dist", "example.md");
 
-const generated = htmlize.markdownToHtml(markdownContent);
+// const generated = htmlize.markdownToHtml(markdownContent);
 
-console.log(generated);
+htmlize.generateHtml(markdownContent, "dist/cjs", "generated.html");
+
+// console.log(generated);

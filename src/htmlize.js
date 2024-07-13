@@ -102,7 +102,7 @@
             const linkTextEndIndex = line.indexOf("]");
             const linkText = line.substring(
               linkTextStartIndex,
-              linkTextEndIndex,
+              linkTextEndIndex
             );
             const urlStartIndex = line.indexOf("](") + 2;
             const urlEndIndex = line.indexOf(")");
@@ -176,6 +176,36 @@
       }
 
       return html;
+    }
+
+    /**
+     * Generates HTML file from markdown content
+     *
+     * @param {string} markdownContent - The markdown content to convert to HTML
+     * @param {string} outputDirectory - The directory where the generated HTML file will be saved
+     * @param {string} outputFileName - The name of the generated HTML file
+     * @throws {Error} If an error occurs during the generation of the HTML file
+     */
+    generateHtml(markdownContent, outputDirectory, outputFileName) {
+      try {
+        const htmlContent = this.markdownToHtml(markdownContent);
+
+        const templatePath = path.resolve(__dirname, "template.html");
+        let templateHtml = fs.readFileSync(templatePath, "utf-8");
+
+        templateHtml = templateHtml.replace("<!-- TITLE -->", outputFileName);
+        templateHtml = templateHtml.replace("<!-- CONTENT -->", htmlContent);
+
+        const outputPath = path.resolve(outputDirectory, outputFileName);
+
+        fs.writeFileSync(outputPath, templateHtml, "utf-8");
+
+        console.log(
+          `HTML file "${outputFileName}" generated successfully at ${outputPath}!`
+        );
+      } catch (error) {
+        throw new Error("Error generating HTML file: " + error.message);
+      }
     }
   }
 
