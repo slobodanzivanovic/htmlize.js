@@ -89,6 +89,10 @@
             }
 
             firstItem = false;
+          } else if (/^={3,}$/.test(line)) {
+            html += "<hr />\n\n";
+          } else if (/^-{3,}$/.test(line)) {
+            html += "<hr />\n\n";
           } else if (line.startsWith("![")) {
             const altTextStartIndex = line.indexOf("[") + 1;
             const altTextEndIndex = line.indexOf("]");
