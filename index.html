@@ -52,6 +52,12 @@
     </style>
 
     <script src="./src/htmlize.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/styles/default.min.css"
+    />
+    <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
   </head>
   <body>
     <h1 class="title">Markdown to HTML</h1>
@@ -72,6 +78,8 @@
         const convertedContent = generate.markdownToHtml(content.value);
 
         display.innerHTML = convertedContent;
+
+        hljs.highlightAll();
 
         console.log(convertedContent);
       });

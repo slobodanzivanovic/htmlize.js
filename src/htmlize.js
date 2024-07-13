@@ -45,6 +45,7 @@
       let firstItem = true;
 
       let inCodeBlock = false;
+      let codeLanguage = "";
 
       let inBlockquote = false;
 
@@ -64,7 +65,8 @@
             html += "\t</code>\n</pre>\n\n";
             inCodeBlock = false;
           } else {
-            html += "<pre>\n\t<code>\n";
+            codeLanguage = line.substring(3).trim();
+            html += `<pre>\n\t<code class="language-${codeLanguage.toLowerCase()}">\n`;
             inCodeBlock = true;
           }
         } else if (inCodeBlock) {

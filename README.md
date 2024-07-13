@@ -16,6 +16,6 @@ Can be used on both Web and CLI. Example usage can be found in `dist`.
 - [x] Strikethrough support
 - [x] Blockquote support
 - [x] Horizontal rule support
+- [x] Web code syntax higlight
 - [ ] Nested list support
 - [ ] Table support
-- [ ] Web code syntax higlight
