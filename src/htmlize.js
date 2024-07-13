@@ -46,8 +46,20 @@
 
       let inCodeBlock = false;
 
+      let inBlockquote = false;
+
       for (let line of lines) {
-        if (line.startsWith("```")) {
+        if (line.startsWith(">")) {
+          if (!inBlockquote) {
+            inBlockquote = true;
+            html += "<blockquote>\n";
+          }
+          line = line.substring(1);
+          html += `\t<p>${line.trim()}</p>\n`;
+        } else if (inBlockquote) {
+          html += "</blockquote>\n\n";
+          inBlockquote = false;
+        } else if (line.startsWith("```")) {
           if (inCodeBlock) {
             html += "\t</code>\n</pre>\n\n";
             inCodeBlock = false;
@@ -77,6 +89,25 @@
             }
 
             firstItem = false;
+          } else if (line.startsWith("![")) {
+            const altTextStartIndex = line.indexOf("[") + 1;
+            const altTextEndIndex = line.indexOf("]");
+            const altText = line.substring(altTextStartIndex, altTextEndIndex);
+            const urlStartIndex = line.indexOf("(") + 1;
+            const urlEndIndex = line.indexOf(")");
+            const url = line.substring(urlStartIndex, urlEndIndex);
+            html += `<img src="${url}" alt="${altText}">\n\n`;
+          } else if (line.includes("[") && line.includes("](")) {
+            const linkTextStartIndex = line.indexOf("[") + 1;
+            const linkTextEndIndex = line.indexOf("]");
+            const linkText = line.substring(
+              linkTextStartIndex,
+              linkTextEndIndex,
+            );
+            const urlStartIndex = line.indexOf("](") + 2;
+            const urlEndIndex = line.indexOf(")");
+            const url = line.substring(urlStartIndex, urlEndIndex);
+            html += `<a href="${url}">${linkText}</a>\n\n`;
           } else if (/^\d+\./.test(line)) {
             if (!inList) {
               inList = true;
@@ -120,7 +151,9 @@
                   .replace(/(\*|_)(.*?)\1/gim, "<i>$2</i>")
 
                   // inline code
-                  .replace(/(`)(.*?)\1/g, "<code>$2</code>");
+                  .replace(/(`)(.*?)\1/g, "<code>$2</code>")
+                  // strikethrough
+                  .replace(/~~(.*?)~~/gim, "<s>$1</s>");
 
                 // add to paragraph even if it is clear par or with bold/italic
                 html += `<p>${line}</p>\n\n`;
@@ -136,6 +169,10 @@
 
       if (inCodeBlock) {
         html += "\t</code>\n</pre>\n\n";
+      }
+
+      if (inBlockquote) {
+        html += "</blockquote>\n\n";
       }
 
       return html;

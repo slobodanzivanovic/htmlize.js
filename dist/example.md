@@ -1,15 +1,29 @@
-# Heading 1
+# Htmlize.js
 
-## Heading 2
+This is simple, stupid markdown to html converter.
 
-### Heading 3
+It support some **stuff!**
 
-#### Heading 4
+- Lists
+- Images
+- Href
+- Italic
+- Bold
+- Combined italic, bold
+- Blockquotes
+- and much more in future i hope :D
 
-##### Heading 5
+Lets take a look at image
 
-###### Heading 6
+![slobodan git avatar](https://avatars.githubusercontent.com/u/172178046?v=4)
 
-########## Random heading
+Also lets take a look at some href
 
-Random text here and also **it have** bold and _italic_ inside it.
+[click me](https://google.com)
+
+And blockquote
+
+> Like this
+> And this :D
+
+**~~strikethrough~~**
